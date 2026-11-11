@@ -1,0 +1,27 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.13.17, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\atiol\AppData\Local\Programs\Python\Python313\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\atiol\workspace\language-of-computation\week4-assignment
+collecting ... collected 19 items
+
+test_ingest.py::test_example_01_lost_leading_zero PASSED                 [  5%]
+test_ingest.py::test_example_02_check_digit_fails PASSED                 [ 10%]
+test_ingest.py::test_example_03_two_zeros_added PASSED                   [ 15%]
+test_ingest.py::test_example_04_hyphens_removed PASSED                   [ 21%]
+test_ingest.py::test_example_05_spaces_removed PASSED                    [ 26%]
+test_ingest.py::test_example_06_lowercase_x PASSED                       [ 31%]
+test_ingest.py::test_example_07_zero_not_kept_when_check_fails PASSED    [ 36%]
+test_ingest.py::test_example_08_letter PASSED                            [ 42%]
+test_ingest.py::test_example_09_eleven_digits PASSED                     [ 47%]
+test_ingest.py::test_example_10_isbn13_in_isbn_column_is_moved PASSED    [ 52%]
+test_ingest.py::test_example_11_scientific_notation PASSED               [ 57%]
+test_ingest.py::test_example_12_scientific_notation_wrong_prefix PASSED  [ 63%]
+test_ingest.py::test_example_13_duplicate_isbn_on_another_book PASSED    [ 68%]
+test_ingest.py::test_example_14_both_empty PASSED                        [ 73%]
+test_ingest.py::test_example_15_empty_isbn_beside_979 PASSED             [ 78%]
+test_ingest.py::test_same_file_twice_creates_no_duplicates PASSED        [ 84%]
+test_ingest.py::test_every_run_appends_to_the_log PASSED                 [ 89%]
+test_ingest.py::test_outcomes_add_up_to_rows_read PASSED                 [ 94%]
+test_ingest.py::test_same_file_on_empty_database_gives_same_database PASSED [100%]
+
+============================= 19 passed in 9.60s ==============================

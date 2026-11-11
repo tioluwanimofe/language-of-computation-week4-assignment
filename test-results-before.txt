@@ -1,0 +1,640 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.13.17, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\atiol\AppData\Local\Programs\Python\Python313\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\atiol\workspace\language-of-computation\week4-assignment
+collecting ... collected 19 items
+
+test_ingest.py::test_example_01_lost_leading_zero FAILED                 [  5%]
+test_ingest.py::test_example_02_check_digit_fails FAILED                 [ 10%]
+test_ingest.py::test_example_03_two_zeros_added FAILED                   [ 15%]
+test_ingest.py::test_example_04_hyphens_removed FAILED                   [ 21%]
+test_ingest.py::test_example_05_spaces_removed FAILED                    [ 26%]
+test_ingest.py::test_example_06_lowercase_x FAILED                       [ 31%]
+test_ingest.py::test_example_07_zero_not_kept_when_check_fails FAILED    [ 36%]
+test_ingest.py::test_example_08_letter FAILED                            [ 42%]
+test_ingest.py::test_example_09_eleven_digits FAILED                     [ 47%]
+test_ingest.py::test_example_10_isbn13_in_isbn_column_is_moved FAILED    [ 52%]
+test_ingest.py::test_example_11_scientific_notation FAILED               [ 57%]
+test_ingest.py::test_example_12_scientific_notation_wrong_prefix FAILED  [ 63%]
+test_ingest.py::test_example_13_duplicate_isbn_on_another_book FAILED    [ 68%]
+test_ingest.py::test_example_14_both_empty FAILED                        [ 73%]
+test_ingest.py::test_example_15_empty_isbn_beside_979 FAILED             [ 78%]
+test_ingest.py::test_same_file_twice_creates_no_duplicates FAILED        [ 84%]
+test_ingest.py::test_every_run_appends_to_the_log FAILED                 [ 89%]
+test_ingest.py::test_outcomes_add_up_to_rows_read FAILED                 [ 94%]
+test_ingest.py::test_same_file_on_empty_database_gives_same_database FAILED [100%]
+
+================================== FAILURES ===================================
+______________________ test_example_01_lost_leading_zero ______________________
+
+workdir = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-40ucf5pv'
+
+    def test_example_01_lost_leading_zero(workdir):
+>       b, entry = ingest_one(workdir, "439023483", "9780439023481")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_ingest.py:127: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_ingest.py:118: in ingest_one
+    db, log = run_ingest(folder, csv_path)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+folder = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-40ucf5pv'
+csv_path = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-40ucf5pv\\one.csv'
+db_name = 'test.db'
+
+    def run_ingest(folder, csv_path, db_name="test.db"):
+        db = os.path.join(folder, db_name)
+        log = os.path.join(folder, "test-log.json")
+        result = subprocess.run(
+            [sys.executable, INGEST, csv_path, "--db", db, "--log", log],
+            cwd=folder, capture_output=True, text=True)
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Usage: python ingest.py <books csv file>
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['C:\\Users\\atiol\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\ingest.py', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-40ucf5pv\\one.csv', '--db', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-40ucf5pv\\test.db', '--log', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-40ucf5pv\\test-log.json'], returncode=2, stdout='Usage: python ingest.py <books csv file>\n', stderr='').returncode
+
+test_ingest.py:72: AssertionError
+______________________ test_example_02_check_digit_fails ______________________
+
+workdir = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-fen5i4kf'
+
+    def test_example_02_check_digit_fails(workdir):
+>       b, entry = ingest_one(workdir, "1854433017", "9781854433015")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_ingest.py:135: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_ingest.py:118: in ingest_one
+    db, log = run_ingest(folder, csv_path)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+folder = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-fen5i4kf'
+csv_path = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-fen5i4kf\\one.csv'
+db_name = 'test.db'
+
+    def run_ingest(folder, csv_path, db_name="test.db"):
+        db = os.path.join(folder, db_name)
+        log = os.path.join(folder, "test-log.json")
+        result = subprocess.run(
+            [sys.executable, INGEST, csv_path, "--db", db, "--log", log],
+            cwd=folder, capture_output=True, text=True)
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Usage: python ingest.py <books csv file>
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['C:\\Users\\atiol\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\ingest.py', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-fen5i4kf\\one.csv', '--db', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-fen5i4kf\\test.db', '--log', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-fen5i4kf\\test-log.json'], returncode=2, stdout='Usage: python ingest.py <books csv file>\n', stderr='').returncode
+
+test_ingest.py:72: AssertionError
+_______________________ test_example_03_two_zeros_added _______________________
+
+workdir = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-osxviwxo'
+
+    def test_example_03_two_zeros_added(workdir):
+>       b, _ = ingest_one(workdir, "61120081", "9780061120084")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_ingest.py:143: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_ingest.py:118: in ingest_one
+    db, log = run_ingest(folder, csv_path)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+folder = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-osxviwxo'
+csv_path = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-osxviwxo\\one.csv'
+db_name = 'test.db'
+
+    def run_ingest(folder, csv_path, db_name="test.db"):
+        db = os.path.join(folder, db_name)
+        log = os.path.join(folder, "test-log.json")
+        result = subprocess.run(
+            [sys.executable, INGEST, csv_path, "--db", db, "--log", log],
+            cwd=folder, capture_output=True, text=True)
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Usage: python ingest.py <books csv file>
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['C:\\Users\\atiol\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\ingest.py', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-osxviwxo\\one.csv', '--db', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-osxviwxo\\test.db', '--log', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-osxviwxo\\test-log.json'], returncode=2, stdout='Usage: python ingest.py <books csv file>\n', stderr='').returncode
+
+test_ingest.py:72: AssertionError
+_______________________ test_example_04_hyphens_removed _______________________
+
+workdir = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-1ihu81if'
+
+    def test_example_04_hyphens_removed(workdir):
+>       b, _ = ingest_one(workdir, "0-450-19827-8", "9780450198274")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_ingest.py:149: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_ingest.py:118: in ingest_one
+    db, log = run_ingest(folder, csv_path)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+folder = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-1ihu81if'
+csv_path = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-1ihu81if\\one.csv'
+db_name = 'test.db'
+
+    def run_ingest(folder, csv_path, db_name="test.db"):
+        db = os.path.join(folder, db_name)
+        log = os.path.join(folder, "test-log.json")
+        result = subprocess.run(
+            [sys.executable, INGEST, csv_path, "--db", db, "--log", log],
+            cwd=folder, capture_output=True, text=True)
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Usage: python ingest.py <books csv file>
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['C:\\Users\\atiol\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\ingest.py', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-1ihu81if\\one.csv', '--db', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-1ihu81if\\test.db', '--log', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-1ihu81if\\test-log.json'], returncode=2, stdout='Usage: python ingest.py <books csv file>\n', stderr='').returncode
+
+test_ingest.py:72: AssertionError
+_______________________ test_example_05_spaces_removed ________________________
+
+workdir = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-22hy4fs8'
+
+    def test_example_05_spaces_removed(workdir):
+>       b, _ = ingest_one(workdir, " 162 001 4750 ", "9781620014752")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_ingest.py:155: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_ingest.py:118: in ingest_one
+    db, log = run_ingest(folder, csv_path)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+folder = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-22hy4fs8'
+csv_path = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-22hy4fs8\\one.csv'
+db_name = 'test.db'
+
+    def run_ingest(folder, csv_path, db_name="test.db"):
+        db = os.path.join(folder, db_name)
+        log = os.path.join(folder, "test-log.json")
+        result = subprocess.run(
+            [sys.executable, INGEST, csv_path, "--db", db, "--log", log],
+            cwd=folder, capture_output=True, text=True)
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Usage: python ingest.py <books csv file>
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['C:\\Users\\atiol\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\ingest.py', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-22hy4fs8\\one.csv', '--db', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-22hy4fs8\\test.db', '--log', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-22hy4fs8\\test-log.json'], returncode=2, stdout='Usage: python ingest.py <books csv file>\n', stderr='').returncode
+
+test_ingest.py:72: AssertionError
+_________________________ test_example_06_lowercase_x _________________________
+
+workdir = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-ql2_arwg'
+
+    def test_example_06_lowercase_x(workdir):
+>       b, _ = ingest_one(workdir, "031200009x", "9780312000097")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_ingest.py:161: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_ingest.py:118: in ingest_one
+    db, log = run_ingest(folder, csv_path)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+folder = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-ql2_arwg'
+csv_path = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-ql2_arwg\\one.csv'
+db_name = 'test.db'
+
+    def run_ingest(folder, csv_path, db_name="test.db"):
+        db = os.path.join(folder, db_name)
+        log = os.path.join(folder, "test-log.json")
+        result = subprocess.run(
+            [sys.executable, INGEST, csv_path, "--db", db, "--log", log],
+            cwd=folder, capture_output=True, text=True)
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Usage: python ingest.py <books csv file>
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['C:\\Users\\atiol\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\ingest.py', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-ql2_arwg\\one.csv', '--db', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-ql2_arwg\\test.db', '--log', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-ql2_arwg\\test-log.json'], returncode=2, stdout='Usage: python ingest.py <books csv file>\n', stderr='').returncode
+
+test_ingest.py:72: AssertionError
+_______________ test_example_07_zero_not_kept_when_check_fails ________________
+
+workdir = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-75c4oczm'
+
+    def test_example_07_zero_not_kept_when_check_fails(workdir):
+>       b, entry = ingest_one(workdir, "385535144", "9780385535144")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_ingest.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_ingest.py:118: in ingest_one
+    db, log = run_ingest(folder, csv_path)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+folder = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-75c4oczm'
+csv_path = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-75c4oczm\\one.csv'
+db_name = 'test.db'
+
+    def run_ingest(folder, csv_path, db_name="test.db"):
+        db = os.path.join(folder, db_name)
+        log = os.path.join(folder, "test-log.json")
+        result = subprocess.run(
+            [sys.executable, INGEST, csv_path, "--db", db, "--log", log],
+            cwd=folder, capture_output=True, text=True)
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Usage: python ingest.py <books csv file>
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['C:\\Users\\atiol\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\ingest.py', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-75c4oczm\\one.csv', '--db', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-75c4oczm\\test.db', '--log', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-75c4oczm\\test-log.json'], returncode=2, stdout='Usage: python ingest.py <books csv file>\n', stderr='').returncode
+
+test_ingest.py:72: AssertionError
+___________________________ test_example_08_letter ____________________________
+
+workdir = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-7d5e2q1k'
+
+    def test_example_08_letter(workdir):
+>       b, entry = ingest_one(workdir, "04390A3483", "9780439023481")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_ingest.py:176: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_ingest.py:118: in ingest_one
+    db, log = run_ingest(folder, csv_path)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+folder = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-7d5e2q1k'
+csv_path = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-7d5e2q1k\\one.csv'
+db_name = 'test.db'
+
+    def run_ingest(folder, csv_path, db_name="test.db"):
+        db = os.path.join(folder, db_name)
+        log = os.path.join(folder, "test-log.json")
+        result = subprocess.run(
+            [sys.executable, INGEST, csv_path, "--db", db, "--log", log],
+            cwd=folder, capture_output=True, text=True)
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Usage: python ingest.py <books csv file>
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['C:\\Users\\atiol\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\ingest.py', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-7d5e2q1k\\one.csv', '--db', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-7d5e2q1k\\test.db', '--log', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-7d5e2q1k\\test-log.json'], returncode=2, stdout='Usage: python ingest.py <books csv file>\n', stderr='').returncode
+
+test_ingest.py:72: AssertionError
+________________________ test_example_09_eleven_digits ________________________
+
+workdir = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-w6mfb8ed'
+
+    def test_example_09_eleven_digits(workdir):
+>       b, entry = ingest_one(workdir, "15287463097", "9781528746304")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_ingest.py:184: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_ingest.py:118: in ingest_one
+    db, log = run_ingest(folder, csv_path)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+folder = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-w6mfb8ed'
+csv_path = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-w6mfb8ed\\one.csv'
+db_name = 'test.db'
+
+    def run_ingest(folder, csv_path, db_name="test.db"):
+        db = os.path.join(folder, db_name)
+        log = os.path.join(folder, "test-log.json")
+        result = subprocess.run(
+            [sys.executable, INGEST, csv_path, "--db", db, "--log", log],
+            cwd=folder, capture_output=True, text=True)
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Usage: python ingest.py <books csv file>
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['C:\\Users\\atiol\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\ingest.py', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-w6mfb8ed\\one.csv', '--db', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-w6mfb8ed\\test.db', '--log', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-w6mfb8ed\\test-log.json'], returncode=2, stdout='Usage: python ingest.py <books csv file>\n', stderr='').returncode
+
+test_ingest.py:72: AssertionError
+_______________ test_example_10_isbn13_in_isbn_column_is_moved ________________
+
+workdir = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-bpkl_o81'
+
+    def test_example_10_isbn13_in_isbn_column_is_moved(workdir):
+>       b, entry = ingest_one(workdir, "9781982147600", "")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_ingest.py:192: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_ingest.py:118: in ingest_one
+    db, log = run_ingest(folder, csv_path)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+folder = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-bpkl_o81'
+csv_path = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-bpkl_o81\\one.csv'
+db_name = 'test.db'
+
+    def run_ingest(folder, csv_path, db_name="test.db"):
+        db = os.path.join(folder, db_name)
+        log = os.path.join(folder, "test-log.json")
+        result = subprocess.run(
+            [sys.executable, INGEST, csv_path, "--db", db, "--log", log],
+            cwd=folder, capture_output=True, text=True)
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Usage: python ingest.py <books csv file>
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['C:\\Users\\atiol\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\ingest.py', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-bpkl_o81\\one.csv', '--db', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-bpkl_o81\\test.db', '--log', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-bpkl_o81\\test-log.json'], returncode=2, stdout='Usage: python ingest.py <books csv file>\n', stderr='').returncode
+
+test_ingest.py:72: AssertionError
+_____________________ test_example_11_scientific_notation _____________________
+
+workdir = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-pjg12zif'
+
+    def test_example_11_scientific_notation(workdir):
+>       b, entry = ingest_one(workdir, "0439023483", "9.78043902348e+12")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_ingest.py:202: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_ingest.py:118: in ingest_one
+    db, log = run_ingest(folder, csv_path)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+folder = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-pjg12zif'
+csv_path = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-pjg12zif\\one.csv'
+db_name = 'test.db'
+
+    def run_ingest(folder, csv_path, db_name="test.db"):
+        db = os.path.join(folder, db_name)
+        log = os.path.join(folder, "test-log.json")
+        result = subprocess.run(
+            [sys.executable, INGEST, csv_path, "--db", db, "--log", log],
+            cwd=folder, capture_output=True, text=True)
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Usage: python ingest.py <books csv file>
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['C:\\Users\\atiol\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\ingest.py', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-pjg12zif\\one.csv', '--db', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-pjg12zif\\test.db', '--log', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-pjg12zif\\test-log.json'], returncode=2, stdout='Usage: python ingest.py <books csv file>\n', stderr='').returncode
+
+test_ingest.py:72: AssertionError
+______________ test_example_12_scientific_notation_wrong_prefix _______________
+
+workdir = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-2k_ia00y'
+
+    def test_example_12_scientific_notation_wrong_prefix(workdir):
+>       b, entry = ingest_one(workdir, "0439023483", "2.94001623192e+12")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_ingest.py:211: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_ingest.py:118: in ingest_one
+    db, log = run_ingest(folder, csv_path)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+folder = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-2k_ia00y'
+csv_path = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-2k_ia00y\\one.csv'
+db_name = 'test.db'
+
+    def run_ingest(folder, csv_path, db_name="test.db"):
+        db = os.path.join(folder, db_name)
+        log = os.path.join(folder, "test-log.json")
+        result = subprocess.run(
+            [sys.executable, INGEST, csv_path, "--db", db, "--log", log],
+            cwd=folder, capture_output=True, text=True)
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Usage: python ingest.py <books csv file>
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['C:\\Users\\atiol\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\ingest.py', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-2k_ia00y\\one.csv', '--db', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-2k_ia00y\\test.db', '--log', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-2k_ia00y\\test-log.json'], returncode=2, stdout='Usage: python ingest.py <books csv file>\n', stderr='').returncode
+
+test_ingest.py:72: AssertionError
+_______________ test_example_13_duplicate_isbn_on_another_book ________________
+
+workdir = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-ci7lt3ft'
+
+    def test_example_13_duplicate_isbn_on_another_book(workdir):
+        csv_path = write_csv(workdir, "dup.csv", [
+            make_row("9", "1416524797", "", title="Angels & Demons"),
+            make_row("10013", "1416524797", "", title="Paper Moons"),
+        ])
+>       db, log = run_ingest(workdir, csv_path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_ingest.py:224: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+folder = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-ci7lt3ft'
+csv_path = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-ci7lt3ft\\dup.csv'
+db_name = 'test.db'
+
+    def run_ingest(folder, csv_path, db_name="test.db"):
+        db = os.path.join(folder, db_name)
+        log = os.path.join(folder, "test-log.json")
+        result = subprocess.run(
+            [sys.executable, INGEST, csv_path, "--db", db, "--log", log],
+            cwd=folder, capture_output=True, text=True)
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Usage: python ingest.py <books csv file>
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['C:\\Users\\atiol\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\ingest.py', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-ci7lt3ft\\dup.csv', '--db', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-ci7lt3ft\\test.db', '--log', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-ci7lt3ft\\test-log.json'], returncode=2, stdout='Usage: python ingest.py <books csv file>\n', stderr='').returncode
+
+test_ingest.py:72: AssertionError
+_________________________ test_example_14_both_empty __________________________
+
+workdir = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-etcsjnkn'
+
+    def test_example_14_both_empty(workdir):
+>       b, entry = ingest_one(workdir, "", "")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_ingest.py:234: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_ingest.py:118: in ingest_one
+    db, log = run_ingest(folder, csv_path)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+folder = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-etcsjnkn'
+csv_path = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-etcsjnkn\\one.csv'
+db_name = 'test.db'
+
+    def run_ingest(folder, csv_path, db_name="test.db"):
+        db = os.path.join(folder, db_name)
+        log = os.path.join(folder, "test-log.json")
+        result = subprocess.run(
+            [sys.executable, INGEST, csv_path, "--db", db, "--log", log],
+            cwd=folder, capture_output=True, text=True)
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Usage: python ingest.py <books csv file>
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['C:\\Users\\atiol\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\ingest.py', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-etcsjnkn\\one.csv', '--db', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-etcsjnkn\\test.db', '--log', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-etcsjnkn\\test-log.json'], returncode=2, stdout='Usage: python ingest.py <books csv file>\n', stderr='').returncode
+
+test_ingest.py:72: AssertionError
+____________________ test_example_15_empty_isbn_beside_979 ____________________
+
+workdir = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-n8cbvtdl'
+
+    def test_example_15_empty_isbn_beside_979(workdir):
+>       b, entry = ingest_one(workdir, "", "9798351220413")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_ingest.py:242: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_ingest.py:118: in ingest_one
+    db, log = run_ingest(folder, csv_path)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+folder = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-n8cbvtdl'
+csv_path = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-n8cbvtdl\\one.csv'
+db_name = 'test.db'
+
+    def run_ingest(folder, csv_path, db_name="test.db"):
+        db = os.path.join(folder, db_name)
+        log = os.path.join(folder, "test-log.json")
+        result = subprocess.run(
+            [sys.executable, INGEST, csv_path, "--db", db, "--log", log],
+            cwd=folder, capture_output=True, text=True)
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Usage: python ingest.py <books csv file>
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['C:\\Users\\atiol\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\ingest.py', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-n8cbvtdl\\one.csv', '--db', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-n8cbvtdl\\test.db', '--log', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-n8cbvtdl\\test-log.json'], returncode=2, stdout='Usage: python ingest.py <books csv file>\n', stderr='').returncode
+
+test_ingest.py:72: AssertionError
+_________________ test_same_file_twice_creates_no_duplicates __________________
+
+workdir = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-sufe6c8m'
+
+    def test_same_file_twice_creates_no_duplicates(workdir):
+>       db, _ = run_ingest(workdir, BATCH2)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_ingest.py:253: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+folder = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-sufe6c8m'
+csv_path = 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\books-batch2.csv'
+db_name = 'test.db'
+
+    def run_ingest(folder, csv_path, db_name="test.db"):
+        db = os.path.join(folder, db_name)
+        log = os.path.join(folder, "test-log.json")
+        result = subprocess.run(
+            [sys.executable, INGEST, csv_path, "--db", db, "--log", log],
+            cwd=folder, capture_output=True, text=True)
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Usage: python ingest.py <books csv file>
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['C:\\Users\\atiol\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\ingest.py', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\books-batch2.csv', '--db', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-sufe6c8m\\test.db', '--log', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-sufe6c8m\\test-log.json'], returncode=2, stdout='Usage: python ingest.py <books csv file>\n', stderr='').returncode
+
+test_ingest.py:72: AssertionError
+______________________ test_every_run_appends_to_the_log ______________________
+
+workdir = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-k4z_lbxv'
+
+    def test_every_run_appends_to_the_log(workdir):
+>       _, log = run_ingest(workdir, BATCH2)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_ingest.py:262: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+folder = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-k4z_lbxv'
+csv_path = 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\books-batch2.csv'
+db_name = 'test.db'
+
+    def run_ingest(folder, csv_path, db_name="test.db"):
+        db = os.path.join(folder, db_name)
+        log = os.path.join(folder, "test-log.json")
+        result = subprocess.run(
+            [sys.executable, INGEST, csv_path, "--db", db, "--log", log],
+            cwd=folder, capture_output=True, text=True)
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Usage: python ingest.py <books csv file>
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['C:\\Users\\atiol\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\ingest.py', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\books-batch2.csv', '--db', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-k4z_lbxv\\test.db', '--log', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-k4z_lbxv\\test-log.json'], returncode=2, stdout='Usage: python ingest.py <books csv file>\n', stderr='').returncode
+
+test_ingest.py:72: AssertionError
+______________________ test_outcomes_add_up_to_rows_read ______________________
+
+workdir = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-edw6eqtz'
+
+    def test_outcomes_add_up_to_rows_read(workdir):
+>       _, log = run_ingest(workdir, BATCH2)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_ingest.py:272: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+folder = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-edw6eqtz'
+csv_path = 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\books-batch2.csv'
+db_name = 'test.db'
+
+    def run_ingest(folder, csv_path, db_name="test.db"):
+        db = os.path.join(folder, db_name)
+        log = os.path.join(folder, "test-log.json")
+        result = subprocess.run(
+            [sys.executable, INGEST, csv_path, "--db", db, "--log", log],
+            cwd=folder, capture_output=True, text=True)
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Usage: python ingest.py <books csv file>
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['C:\\Users\\atiol\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\ingest.py', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\books-batch2.csv', '--db', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-edw6eqtz\\test.db', '--log', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-edw6eqtz\\test-log.json'], returncode=2, stdout='Usage: python ingest.py <books csv file>\n', stderr='').returncode
+
+test_ingest.py:72: AssertionError
+____________ test_same_file_on_empty_database_gives_same_database _____________
+
+workdir = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-gsj59em6'
+
+    def test_same_file_on_empty_database_gives_same_database(workdir):
+>       db1, _ = run_ingest(workdir, BATCH2, db_name="test.db")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_ingest.py:282: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+folder = 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-gsj59em6'
+csv_path = 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\books-batch2.csv'
+db_name = 'test.db'
+
+    def run_ingest(folder, csv_path, db_name="test.db"):
+        db = os.path.join(folder, db_name)
+        log = os.path.join(folder, "test-log.json")
+        result = subprocess.run(
+            [sys.executable, INGEST, csv_path, "--db", db, "--log", log],
+            cwd=folder, capture_output=True, text=True)
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Usage: python ingest.py <books csv file>
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['C:\\Users\\atiol\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\ingest.py', 'C:\\Users\\atiol\\workspace\\language-of-computation\\week4-assignment\\books-batch2.csv', '--db', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-gsj59em6\\test.db', '--log', 'C:\\Users\\atiol\\AppData\\Local\\Temp\\ingest-test-gsj59em6\\test-log.json'], returncode=2, stdout='Usage: python ingest.py <books csv file>\n', stderr='').returncode
+
+test_ingest.py:72: AssertionError
+=========================== short test summary info ===========================
+FAILED test_ingest.py::test_example_01_lost_leading_zero - AssertionError: Us...
+FAILED test_ingest.py::test_example_02_check_digit_fails - AssertionError: Us...
+FAILED test_ingest.py::test_example_03_two_zeros_added - AssertionError: Usag...
+FAILED test_ingest.py::test_example_04_hyphens_removed - AssertionError: Usag...
+FAILED test_ingest.py::test_example_05_spaces_removed - AssertionError: Usage...
+FAILED test_ingest.py::test_example_06_lowercase_x - AssertionError: Usage: p...
+FAILED test_ingest.py::test_example_07_zero_not_kept_when_check_fails - Asser...
+FAILED test_ingest.py::test_example_08_letter - AssertionError: Usage: python...
+FAILED test_ingest.py::test_example_09_eleven_digits - AssertionError: Usage:...
+FAILED test_ingest.py::test_example_10_isbn13_in_isbn_column_is_moved - Asser...
+FAILED test_ingest.py::test_example_11_scientific_notation - AssertionError: ...
+FAILED test_ingest.py::test_example_12_scientific_notation_wrong_prefix - Ass...
+FAILED test_ingest.py::test_example_13_duplicate_isbn_on_another_book - Asser...
+FAILED test_ingest.py::test_example_14_both_empty - AssertionError: Usage: py...
+FAILED test_ingest.py::test_example_15_empty_isbn_beside_979 - AssertionError...
+FAILED test_ingest.py::test_same_file_twice_creates_no_duplicates - Assertion...
+FAILED test_ingest.py::test_every_run_appends_to_the_log - AssertionError: Us...
+FAILED test_ingest.py::test_outcomes_add_up_to_rows_read - AssertionError: Us...
+FAILED test_ingest.py::test_same_file_on_empty_database_gives_same_database
+============================= 19 failed in 6.55s ==============================
